@@ -1,6 +1,5 @@
 let userForm = document.getElementById("frm");
-let userEntries = JSON.parse(sessionStorage.getItem("usersss")) || [];
-
+let userEntries = JSON.parse(localStorage.getItem("usersss")) || [];
 const setDOBRange = () => {
     const dobField = document.getElementById("dob");
     const today = new Date();
@@ -10,7 +9,6 @@ const setDOBRange = () => {
     dobField.min = formatDate(minDate);
     dobField.max = formatDate(maxDate);
 }
-
 const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob);
@@ -21,43 +19,34 @@ const calculateAge = (dob) => {
     }
     return age;
 }
-
 const validateAge = () => {
     const dobField = document.getElementById("dob");
     const dob = dobField.value;
     const age = calculateAge(dob);
+    const today = new Date();
+    const minYear = today.getFullYear() - 55;
+    const maxYear = today.getFullYear() - 18;
+
     if (dob) {
-        if (age < 18 || age > 55) {
-            dobField.setCustomValidity("You must be between 18 and 55 years old.");
+        const dobYear = new Date(dob).getFullYear();
+
+        if (dobYear > maxYear) {
+            dobField.setCustomValidity(`Year should be earlier than or equal to ${maxYear}.`);
+        } else if (dobYear < minYear) {
+            dobField.setCustomValidity(`Year should be later than or equal to ${minYear}.`);
         } else {
             dobField.setCustomValidity("");
         }
     }
+
     dobField.reportValidity();
 }
-
-const validateEmail = () => {
-    const emailField = document.getElementById("email");
-    const email = emailField.value;
-    if (email) {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-            emailField.setCustomValidity(`Please include an '@' in the email address. '${email.toString()}' is missing an '@'.`);
-        } else {
-            emailField.setCustomValidity("");
-        }
-    }
-    emailField.reportValidity();
-}
-
 const saveUserForm = (event) => {
     event.preventDefault();
     validateAge();
-    validateEmail();
 
     const dobField = document.getElementById("dob");
-    const emailField = document.getElementById("email");
-    if (!dobField.checkValidity() || !emailField.checkValidity()) {
+    if (!dobField.checkValidity()) {
         return;
     }
 
@@ -66,12 +55,6 @@ const saveUserForm = (event) => {
     const pass = document.getElementById("password").value;
     const dob = document.getElementById("dob").value;
     const terms = document.getElementById("terms").checked;
-
-    if (!terms) {
-        alert("You must agree to the terms and conditions.");
-        return;
-    }
-
     const entry = {
         name,
         email,
@@ -79,12 +62,10 @@ const saveUserForm = (event) => {
         dob,
         terms
     };
-
     userEntries.push(entry);
-    sessionStorage.setItem("usersss", JSON.stringify(userEntries));
+    localStorage.setItem("usersss", JSON.stringify(userEntries));
     addEntryToTable(entry);
 }
-
 const addEntryToTable = (entry) => {
     const tableBody = document.querySelector("#userTable tbody");
     const row = document.createElement("tr");
@@ -97,20 +78,14 @@ const addEntryToTable = (entry) => {
     `;
     tableBody.appendChild(row);
 }
-
 const loadUserEntries = () => {
     userEntries.forEach(entry => {
         addEntryToTable(entry);
     });
 }
-
 const dobField = document.getElementById("dob");
-const emailField = document.getElementById("email");
-
 dobField.addEventListener("input", validateAge);
-emailField.addEventListener("input", validateEmail);
 userForm.addEventListener("submit", saveUserForm);
-
 window.onload = () => {
     loadUserEntries();
     setDOBRange();

@@ -1,4 +1,6 @@
 let userForm = document.getElementById("frm");
+let userEntries = JSON.parse(localStorage.getItem("usersss")) || [];
+
 const setDOBRange = () => {
     const dobField = document.getElementById("dob");
     const today = new Date();
@@ -8,6 +10,7 @@ const setDOBRange = () => {
     dobField.min = formatDate(minDate);
     dobField.max = formatDate(maxDate);
 }
+
 const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob);
@@ -18,6 +21,7 @@ const calculateAge = (dob) => {
     }
     return age;
 }
+
 const validateAge = () => {
     const dobField = document.getElementById("dob");
     const dob = dobField.value;
@@ -40,6 +44,7 @@ const validateAge = () => {
 
     dobField.reportValidity();
 }
+
 const saveUserForm = (event) => {
     event.preventDefault();
     validateAge();
@@ -48,7 +53,7 @@ const saveUserForm = (event) => {
     if (!dobField.checkValidity()) {
         return;
     }
-    let userEntries = JSON.parse(localStorage.getItem("usersss")) || [];
+
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const pass = document.getElementById("password").value;
@@ -64,8 +69,9 @@ const saveUserForm = (event) => {
     userEntries.push(entry);
     localStorage.setItem("usersss", JSON.stringify(userEntries));
     addEntryToTable(entry);
-    resetForm();
+    userForm.reset();
 }
+
 const addEntryToTable = (entry) => {
     const tableBody = document.querySelector("#userTable tbody");
     const row = document.createElement("tr");
@@ -78,11 +84,15 @@ const addEntryToTable = (entry) => {
     `;
     tableBody.appendChild(row);
 }
+
 const loadUserEntries = () => {
+    const tableBody = document.querySelector("#userTable tbody");
+    tableBody.innerHTML = '';
     userEntries.forEach(entry => {
         addEntryToTable(entry);
     });
 }
+
 const dobField = document.getElementById("dob");
 dobField.addEventListener("input", validateAge);
 userForm.addEventListener("submit", saveUserForm);
@@ -90,11 +100,3 @@ window.onload = () => {
     loadUserEntries();
     setDOBRange();
 };
-const resetForm = () => {
-    document.getElementById("name").value = '';
-    document.getElementById("email").value = '';
-    document.getElementById("password").value = '';
-    document.getElementById("dob").value = '';
-    document.getElementById("terms").checked = false;
-}
-

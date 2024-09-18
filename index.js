@@ -1,5 +1,5 @@
 let userForm = document.getElementById("frm");
-let userEntries = JSON.parse(localStorage.getItem("usersss")) || [];
+let userEntries = JSON.parse(sessionStorage.getItem("usersss")) || [];
 const setDOBRange = () => {
     const dobField = document.getElementById("dob");
     const today = new Date();
@@ -59,7 +59,7 @@ const saveUserForm = (event) => {
         terms
     };
     userEntries.push(entry);
-    localStorage.setItem("usersss", JSON.stringify(userEntries));
+    sessionStorage.setItem("usersss", JSON.stringify(userEntries));
     addEntryToTable(entry);
 }
 const addEntryToTable = (entry) => {

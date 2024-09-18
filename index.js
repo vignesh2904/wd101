@@ -71,7 +71,7 @@ const saveUserForm = (event) => {
     localStorage.setItem("usersss", JSON.stringify(userEntries));
 
     addEntryToTable(entry);
-
+    userForm.reset();
 }
 
 const addEntryToTable = (entry) => {
@@ -92,11 +92,11 @@ const loadUserEntries = () => {
         addEntryToTable(entry);
     });
 }
+
 window.onload = () => {
-    loadUserEntries();
+    loadUserEntries();  
     setDOBRange();
 }
-
 const dobField = document.getElementById("dob");
 dobField.addEventListener("input", validateAge);
 

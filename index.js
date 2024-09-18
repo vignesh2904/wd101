@@ -28,6 +28,7 @@ const validateAge = () => {
     const maxYear = today.getFullYear() - 18;
     if (dob) {
         const dobYear = new Date(dob).getFullYear();
+
         if (dobYear > maxYear) {
             dobField.setCustomValidity(`Year should be earlier than or equal to ${maxYear}.`);
         } else if (dobYear < minYear) {

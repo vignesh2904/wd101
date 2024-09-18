@@ -65,6 +65,7 @@ const saveUserForm = (event) => {
     userEntries.push(entry);
     localStorage.setItem("usersss", JSON.stringify(userEntries));
     addEntryToTable(entry);
+    resetForm();
 }
 const addEntryToTable = (entry) => {
     const tableBody = document.querySelector("#userTable tbody");
@@ -90,3 +91,10 @@ window.onload = () => {
     loadUserEntries();
     setDOBRange();
 };
+const resetForm = () => {
+    document.getElementById("name").value = '';
+    document.getElementById("email").value = '';
+    document.getElementById("password").value = '';
+    document.getElementById("dob").value = '';
+    document.getElementById("terms").checked = false;
+}

@@ -1,5 +1,4 @@
 let userForm = document.getElementById("frm");
-let userEntries = JSON.parse(localStorage.getItem("usersss")) || [];
 const setDOBRange = () => {
     const dobField = document.getElementById("dob");
     const today = new Date();
@@ -49,7 +48,7 @@ const saveUserForm = (event) => {
     if (!dobField.checkValidity()) {
         return;
     }
-
+    let userEntries = JSON.parse(localStorage.getItem("usersss")) || [];
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const pass = document.getElementById("password").value;
@@ -98,3 +97,4 @@ const resetForm = () => {
     document.getElementById("dob").value = '';
     document.getElementById("terms").checked = false;
 }
+

@@ -1,5 +1,6 @@
 let userForm = document.getElementById("frm");
 let userEntries = JSON.parse(localStorage.getItem("usersss")) || [];
+
 const setDOBRange = () => {
     const dobField = document.getElementById("dob");
     const today = new Date();
@@ -9,6 +10,7 @@ const setDOBRange = () => {
     dobField.min = formatDate(minDate);
     dobField.max = formatDate(maxDate);
 }
+
 const calculateAge = (dob) => {
     const today = new Date();
     const birthDate = new Date(dob);
@@ -19,6 +21,7 @@ const calculateAge = (dob) => {
     }
     return age;
 }
+
 const validateAge = () => {
     const dobField = document.getElementById("dob");
     const dob = dobField.value;
@@ -55,6 +58,7 @@ const saveUserForm = (event) => {
     const pass = document.getElementById("password").value;
     const dob = document.getElementById("dob").value;
     const terms = document.getElementById("terms").checked;
+    
     const entry = {
         name,
         email,
@@ -62,10 +66,14 @@ const saveUserForm = (event) => {
         dob,
         terms
     };
+
     userEntries.push(entry);
     localStorage.setItem("usersss", JSON.stringify(userEntries));
+
     addEntryToTable(entry);
+
 }
+
 const addEntryToTable = (entry) => {
     const tableBody = document.querySelector("#userTable tbody");
     const row = document.createElement("tr");
@@ -74,19 +82,22 @@ const addEntryToTable = (entry) => {
         <td>${entry.email}</td>
         <td>${entry.pass}</td>
         <td>${entry.dob}</td>
-        <td>${entry.terms}</td>
+        <td>${entry.terms ? "Yes" : "No"}</td>
     `;
     tableBody.appendChild(row);
 }
+
 const loadUserEntries = () => {
     userEntries.forEach(entry => {
         addEntryToTable(entry);
     });
 }
-const dobField = document.getElementById("dob");
-dobField.addEventListener("input", validateAge);
-userForm.addEventListener("submit", saveUserForm);
 window.onload = () => {
     loadUserEntries();
     setDOBRange();
-};
+}
+
+const dobField = document.getElementById("dob");
+dobField.addEventListener("input", validateAge);
+
+userForm.addEventListener("submit", saveUserForm);

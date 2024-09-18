@@ -1,4 +1,3 @@
-localStorage.clear();
 let userForm = document.getElementById("frm");
 let userEntries = JSON.parse(localStorage.getItem("usersss")) || [];
 const setDOBRange = () => {
@@ -71,7 +70,7 @@ const addEntryToTable = (entry) => {
         <td>${entry.email}</td>
         <td>${entry.pass}</td>
         <td>${entry.dob}</td>
-        <td>${entry.terms ? "Yes" : "No"}</td>
+        <td>${entry.terms}</td>
     `;
     tableBody.appendChild(row);
 }

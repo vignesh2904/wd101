@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="index.css" rel="stylesheet">
+</head>
+<body>
+    <form method='GET' id="frm">
+        <h2>Registration Form</h2>
+        <label for="name" id="lname">Name</label><br><br>
+        <input required type="text" id="name" name="name" placeholder="Enter name">
+        <br><br>
+        <label for="email" id="lemail">Email</label><br><br>
+        <input required type="email" id="email" name="email" placeholder="Enter email">
+        <br><br>
+        <label for="password" id="lpass">Password</label><br><br>
+        <input required type="password" id="password" name="password" placeholder="Enter Password">
+        <br><br>
+        <label for="dob" id="ldob">Date of Birth</label><br><br>
+        <input required type="date" id="dob" name="Date-of-Birth">
+        <br><br>
+        <input required type="checkbox" id="terms" name="terms">
+        <label for="terms" id="lterms">Agree to terms and conditions</label>
+        <br><br>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+    <table id="userTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Date of Birth</th>
+                <th>Accepted Terms</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script src="index.js"></script>
+</body>
+</html>

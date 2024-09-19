@@ -3,53 +3,100 @@ body, html {
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #frm {
-    position:absolute;
-    left:250px;
+    position: relative;
     background-color: bisque;
     padding: 80px 140px;
     text-align: center;
     border-radius: 30px;
+    margin-bottom: 50px;
 }
-#lname,#lemail,#lpass,#ldob{
+
+#lname, #lemail, #lpass, #ldob {
     position: relative;
-    left:-120px;
-    top:37px;
+    left: -120px;
+    top: 37px;
 }
-#terms{
+
+#terms {
     position: relative;
-    left:0px;
-    top:20px;
+    left: 0px;
+    top: 20px;
     cursor: pointer;
 }
-#lterms{
+
+#lterms {
     position: relative;
-    left:0px;
-    top:18px;
+    left: 0px;
+    top: 18px;
     cursor: pointer;
 }
-#name,#email,#password,#dob{
+
+#name, #email, #password, #dob {
     position: relative;
-    left:60px;
+    left: 60px;
 }
-#submit{
-    position:relative;
-    top:20px;
+
+#submit {
+    position: relative;
+    top: 20px;
     background-color: rgb(90, 141, 234);
     color: aliceblue;
     font-size: medium;
-    padding:10px 20px;
+    padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
 }
-#userTable{
-    position: absolute;
-    top:170px;
-    right:100px;
-}
+
 #submit:hover {
     background-color: #2441b5;
+}
+
+#userTable {
+    position: relative;
+    margin-top: 30px;
+    border-spacing: 10px;
+}
+@media screen and (max-width: 1024px) {
+    #frm {
+        padding: 60px 80px;
+    }
+
+    #userTable {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body, html {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #frm {
+        width: 90%;
+        margin-left: 20px;
+    }
+
+    #userTable {
+        width: 90%;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #frm {
+        width: 100%;
+        padding: 40px;
+    }
+
+    #userTable {
+        width: 100%;
+        margin-top: 20px;
+    }
 }

@@ -5,6 +5,7 @@ const retrieveEntries = () => {
     let entries = localStorage.getItem("user-entries");
     return entries ? JSON.parse(entries) : [];
 }
+
 const displayEntries = () => {
     const entries = retrieveEntries();
     
@@ -51,7 +52,8 @@ const saveUserForm = (event) => {
         dob,
         acceptedTerms
     };
-    const userEntries = retrieveEntries()
+    
+    const userEntries = retrieveEntries();
     userEntries.push(entry);
     
     localStorage.setItem('user-entries', JSON.stringify(userEntries));
